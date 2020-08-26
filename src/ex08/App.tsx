@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Switch, Route, Redirect, RouteComponentProps } from "react-router-dom";
 
 import { Header, HeaderActionItem } from "../solution/Header";
@@ -8,12 +8,11 @@ import { loadPeople } from "../utils";
 import { SearchableList } from "../solution/SearchableList";
 import { Player } from "../solution/Player";
 import { Person } from "../solution/Person";
+import { PeopleContext, PeopleProvider } from "./PeopleContext";
+import PeopleList from "./PeopleList";
 
 export const App: React.FC = () => {
-  const [people, setPeople] = useState<People>([]);
-  useEffect(() => {
-    loadPeople().then(setPeople);
-  }, []);
+  const people = useContext(PeopleContext);
 
   return (
     <>
@@ -25,6 +24,7 @@ export const App: React.FC = () => {
         <Loading />
       ) : (
         <Switch>
+          <Route path="/custom-list" component={PeopleList} />
           <Route
             path="/list"
             render={() => <SearchableList people={people} />}

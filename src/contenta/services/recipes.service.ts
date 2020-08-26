@@ -1,39 +1,63 @@
-import { Recipe } from "../models/Recipe";
+import { Recipe } from '../models/Recipe';
+const API_base = 'https://live-contentacms.pantheonsite.io/api/recipes';
 
-const API_URL = 'https://live-contentacms.pantheonsite.io/api/recipes';
+export const fetchRecipes = async (): Promise<Recipe[]> => {
+  const response = await fetch(`${API_base}?include=category,image,image.thumbnail`);
 
-export const fetchRecipes = async () => {
+  const data = await response.json();
+  const categoriesMap = createCategoriesMapFromIncluded(data.included);
+  const imagesMap = createThumbnailMapFromIncluded(data.included);
 
-    const response = await fetch(API_URL);
-    const json = await response.json();    
-
-    const results = await Promise.all(
-        json.data.map(async (recipeRaw: any) => {      
-            // fetch for category
-            const category = await fetchRecipeCategory(recipeRaw.relationships.category);
-            // fetch image
-            const imageUrl = await fetchRecipeImageUrl(recipeRaw.relationships.image);
-
-            return Recipe.fromRawData(recipeRaw, category, imageUrl);
-        })
+  const recipes: Recipe[] = data.data.map((recipeRaw) => {
+    return Recipe.fromRaw(
+      recipeRaw,
+      categoriesMap[recipeRaw.relationships.category.data.id],
+      imagesMap[recipeRaw.relationships.image.data.id]
     );
+  });
 
-    return results;
-}
+  return recipes;
+};
 
+const createCategoriesMapFromIncluded = (included) =>
+  included
+    .filter((include: any): any => include.type === 'categories')
+    .reduce((acc, current: any): any => {
+      acc[current.id] = current.attributes.name;
+      return acc;
+    }, {});
 
-const fetchRecipeCategory = async (categoryRelationShip): Promise<string> => {
-    const response = await fetch(categoryRelationShip.links.related);
-    const categoryJson = await response.json();
-    const categoryName = categoryJson.data.attributes.name
-    return categoryName;
-}
+/**
+ * {
+ *    '12357TRYRTYRTY': 'Salad',
+ *    'rgergerogj234234: 'Main Course'
+ * }
+ */
 
-const fetchRecipeImageUrl = async (imageRelationShip): Promise<string> => {
-    const responseImage = await fetch(imageRelationShip.links.related);
-    const imageJson = await responseImage.json();
+const createThumbnailMapFromIncluded = (included) => {
+  const thumbsMap = included
+    .filter((include) => include.type === 'files')
+    .reduce((mapAccumulator, current) => {
+      mapAccumulator[current.id] = current.attributes.url;
+      return mapAccumulator;
+    }, {});
 
-    const responseThumbnail = await fetch(imageJson.data.relationships.thumbnail.links.related);
-    const thumbnailJson = await responseThumbnail.json();
-    return thumbnailJson.data.attributes.url;
-}
+  return included
+    .filter((include) => include.type === 'images')
+    .reduce((acc, current) => {
+      acc[current.id] = thumbsMap[current.relationships.thumbnail.data.id];
+      return acc;
+    }, {});
+};
+
+/**
+ * map images
+ * {
+ *     'zrzerezr234234': 'zerzegzegz' 
+ * }
+ * 
+ * map thumbnail
+ * {
+ *    'zerzegzegz': 'http://image.png'
+ * }
+ */
