@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Header } from '../solution/Header';
 
 import { RecipeCard } from './RecipeCard';
 import { recipes_data } from './services/data';
+import { fetchRecipes } from './services/recipes.service';
 
 /**
  * Exercice :
@@ -20,15 +21,14 @@ import { recipes_data } from './services/data';
  *   => When you have all infos from Contenta example, 
  *          the object should match Recipe typescript interface
  * 
- * 
  */
 
 export const App: React.FC = () => {
-  // TODO: get this from ./services/recipes.services.ts > fetchRecipes
-  // Tips: use promises to save result in a state
-  const recipes = recipes_data;
+  const [recipes, setRecipes] = useState([]);
 
-  console.log(recipes)
+  useEffect(() => {
+    fetchRecipes().then(setRecipes);
+  }, []);
 
   return (
     <>
