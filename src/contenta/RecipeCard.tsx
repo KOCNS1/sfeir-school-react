@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardContent, CardImage, CardHeader, CardInfo } from '../solution/Card';
+import { Recipe } from './models/Recipe';
 
 type RecipeCardProps = {
   recipe: Recipe;
@@ -28,6 +29,8 @@ export const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => (
           {recipe.instructions}
         </div>
       </CardInfo>
+      <CardInfo icon="av_timer">{recipe.preparationTime} minutes de préparation</CardInfo>
+      <CardInfo icon="timer">{recipe.totalTime} minutes au total</CardInfo>
     </CardContent>
   </Card>
 );

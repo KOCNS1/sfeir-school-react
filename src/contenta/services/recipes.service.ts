@@ -1,8 +1,10 @@
 import { Recipe } from "../models/Recipe";
 
+const API_URL = 'https://live-contentacms.pantheonsite.io/api/recipes';
+
 export const fetchRecipes = async () => {
 
-    const response = await fetch('https://live-contentacms.pantheonsite.io/api/recipes');
+    const response = await fetch(API_URL);
     const json = await response.json();    
 
     const results = await Promise.all(
