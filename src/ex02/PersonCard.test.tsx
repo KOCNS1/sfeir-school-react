@@ -17,6 +17,9 @@ import { PersonCard } from "./PersonCard";
 //     "test": "jest --watchAll ./src"
 //   ...
 
+// 4) disable parcel babel integration ...
+// go here -> https://parceljs.org/languages/javascript/#usage-with-other-tools
+
 describe("PersonCard", () => {
   it("should render div", () => {
     const tree = renderer.create(<div>Hello !</div>).toJSON();
