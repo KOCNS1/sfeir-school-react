@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import { PersonCard } from "./PersonCard";
+import { Card } from "./Card";
 
 // To set up Jest & tests
 
@@ -21,16 +22,49 @@ import { PersonCard } from "./PersonCard";
 // go here -> https://parceljs.org/languages/javascript/#usage-with-other-tools
 
 describe("PersonCard", () => {
+  const person: Person = {
+    id: "5763cd4d9d2a4f259b53c901",
+    photo: "https://randomuser.me/portraits/women/85.jpg",
+    firstname: "Leanne",
+    lastname: "Woodard",
+    position: "Developer",
+    email: "woodard.l@acme.com",
+    phone: "0784112248",
+    manager: "Erika",
+    managerId: "5763cd4d3b57c672861bfa1f",
+  };
+
+  const personWithoutManager: Person = {
+    id: "5763cd4d9d2a4f259b53c901",
+    photo: "https://randomuser.me/portraits/women/85.jpg",
+    firstname: "Leanne",
+    lastname: "Woodard",
+    position: "Developer",
+    email: "woodard.l@acme.com",
+    phone: "0784112248",
+    manager: "",
+    managerId: "",
+  };
+
   it("should render div", () => {
     const tree = renderer.create(<div>Hello !</div>).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
+  it("should render Card", () => {
+    const tree = renderer.create(<Card>hello card</Card>).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it("should render Person with manager", () => {
-    expect(false).toBeTruthy();
+    const tree = renderer.create(<PersonCard person={person} />).toJSON();
+    expect(tree).toMatchSnapshot();
   });
 
   it("should render Person without manager", () => {
-    expect(false).toBeTruthy();
+    const tree = renderer
+      .create(<PersonCard person={personWithoutManager} />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
   });
 });

@@ -1,5 +1,153 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`PersonCard should render Card 1`] = `
+<section
+  className="mdc-card"
+>
+  <div
+    className="card-content content-type-person-info"
+  >
+    hello card
+  </div>
+</section>
+`;
+
+exports[`PersonCard should render Person with manager 1`] = `
+<section
+  className="mdc-card"
+>
+  <div
+    className="card-content content-type-person-info"
+  >
+    <figure>
+      <img
+        alt="face of Leanne"
+        src="https://randomuser.me/portraits/women/85.jpg"
+      />
+    </figure>
+    <header>
+      <h1
+        className="mdc-typography--headline5"
+      >
+        <a
+          href="/person/5763cd4d9d2a4f259b53c901"
+        >
+          Leanne
+           
+          Woodard
+        </a>
+      </h1>
+      <h2
+        className="mdc-typography--subtitle1"
+      >
+        Developer
+      </h2>
+    </header>
+    <p>
+      <i
+        className="rmwc-icon material-icons rmwc-icon--size-small"
+      >
+        email
+      </i>
+       
+      <a
+        href="mailto:woodard.l@acme.com"
+      >
+        woodard.l@acme.com
+      </a>
+    </p>
+    <p>
+      <i
+        className="rmwc-icon material-icons rmwc-icon--size-small"
+      >
+        phone
+      </i>
+       
+      <a
+        href="tel:0784112248"
+      >
+        0784112248
+      </a>
+    </p>
+    <p>
+      <i
+        className="rmwc-icon material-icons rmwc-icon--size-small"
+        title="manager"
+      >
+        supervisor_account
+      </i>
+       
+      <a
+        href="/person/5763cd4d3b57c672861bfa1f"
+      >
+        Erika
+      </a>
+    </p>
+  </div>
+</section>
+`;
+
+exports[`PersonCard should render Person without manager 1`] = `
+<section
+  className="mdc-card"
+>
+  <div
+    className="card-content content-type-person-info"
+  >
+    <figure>
+      <img
+        alt="face of Leanne"
+        src="https://randomuser.me/portraits/women/85.jpg"
+      />
+    </figure>
+    <header>
+      <h1
+        className="mdc-typography--headline5"
+      >
+        <a
+          href="/person/5763cd4d9d2a4f259b53c901"
+        >
+          Leanne
+           
+          Woodard
+        </a>
+      </h1>
+      <h2
+        className="mdc-typography--subtitle1"
+      >
+        Developer
+      </h2>
+    </header>
+    <p>
+      <i
+        className="rmwc-icon material-icons rmwc-icon--size-small"
+      >
+        email
+      </i>
+       
+      <a
+        href="mailto:woodard.l@acme.com"
+      >
+        woodard.l@acme.com
+      </a>
+    </p>
+    <p>
+      <i
+        className="rmwc-icon material-icons rmwc-icon--size-small"
+      >
+        phone
+      </i>
+       
+      <a
+        href="tel:0784112248"
+      >
+        0784112248
+      </a>
+    </p>
+  </div>
+</section>
+`;
+
 exports[`PersonCard should render div 1`] = `
 <div>
   Hello !
