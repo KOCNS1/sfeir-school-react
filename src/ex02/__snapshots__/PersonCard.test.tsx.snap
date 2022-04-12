@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PersonCard should render 1`] = `
+<section
+  className="mdc-card"
+>
+  <div
+    className="card-content content-type-person-info"
+  >
+    <figure>
+      <img
+        alt="face of test"
+      />
+    </figure>
+    <header>
+      <h1
+        className="mdc-typography--headline5"
+      >
+        <a
+          href="/person/undefined"
+        >
+          test
+           
+        </a>
+      </h1>
+      <h2
+        className="mdc-typography--subtitle1"
+      />
+    </header>
+    <p>
+      <i
+        className="rmwc-icon material-icons rmwc-icon--size-small"
+      >
+        email
+      </i>
+       
+      <a
+        href="mailto:undefined"
+      />
+    </p>
+    <p>
+      <i
+        className="rmwc-icon material-icons rmwc-icon--size-small"
+      >
+        phone
+      </i>
+       
+      <a
+        href="tel:undefined"
+      />
+    </p>
+    <p>
+      <i
+        className="rmwc-icon material-icons rmwc-icon--size-small"
+        title="manager"
+      >
+        supervisor_account
+      </i>
+       
+      <a
+        href="/person/undefined"
+      />
+    </p>
+  </div>
+</section>
+`;
