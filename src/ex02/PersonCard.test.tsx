@@ -2,6 +2,9 @@ import React from "react";
 import renderer from "react-test-renderer";
 import { PersonCard } from "./PersonCard";
 import { Card } from "./Card";
+import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import "regenerator-runtime/runtime";
 
 // To set up Jest & tests
 
@@ -66,5 +69,19 @@ describe("PersonCard", () => {
       .create(<PersonCard person={personWithoutManager} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
+  });
+
+  // > npm i -D regenerator-runtime
+
+  // import { render, screen } from "@testing-library/react";
+  // import "@testing-library/jest-dom";
+  // import "regenerator-runtime/runtime";
+
+  it("should render full name", async () => {
+    render(<PersonCard person={person} />);
+
+    const element = screen.getByTestId("full-name");
+
+    expect(element).toHaveTextContent("Leanne Woodard");
   });
 });

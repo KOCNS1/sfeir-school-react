@@ -30,6 +30,7 @@ exports[`PersonCard should render Person with manager 1`] = `
         className="mdc-typography--headline5"
       >
         <a
+          data-testid="full-name"
           href="/person/5763cd4d9d2a4f259b53c901"
         >
           Leanne
@@ -105,6 +106,7 @@ exports[`PersonCard should render Person without manager 1`] = `
         className="mdc-typography--headline5"
       >
         <a
+          data-testid="full-name"
           href="/person/5763cd4d9d2a4f259b53c901"
         >
           Leanne
