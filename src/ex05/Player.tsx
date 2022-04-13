@@ -19,7 +19,15 @@ const Carousel = forwardRef<{ next: () => void }, CarouselProps>(
     const [currentIndex, setCurrentIndex] = useState(0);
     const { pred, succ } = range(0, childArray.length - 1);
 
-    // useImperativeHandle  ....
+    const showNext = () => setCurrentIndex(succ);
+    const showPred = () => setCurrentIndex(pred);
+
+    useImperativeHandle(ref, () => {
+      return {
+        next: showNext,
+        pred: showPred,
+      };
+    });
 
     const cards: [number, string][] = [
       [succ(currentIndex), "next"],
@@ -35,7 +43,7 @@ const Carousel = forwardRef<{ next: () => void }, CarouselProps>(
             cloneElement(childArray[i], { className })
           )}
         </div>
-        <Fab icon="skip_next" mini onClick={() => setCurrentIndex(succ)} />
+        <Fab icon="skip_next" mini onClick={showNext} />
       </div>
     );
   }
@@ -46,19 +54,28 @@ type PlayerProps = {
 };
 
 export const Player: React.FC<PlayerProps> = ({ people }) => {
-  const ref = useRef();
+  const ref = useRef(null);
+
+  const onNextClick = () => {
+    ref.current.next();
+  };
+
+  const onPrevClick = () => {
+    ref.current.pred();
+  };
 
   return (
     <>
       <main>
-        <Carousel ref={ref}>
+        <Carousel>
           {people.map((person) => (
             <PersonCard person={person} key={person.id} />
           ))}
         </Carousel>
       </main>
       <footer>
-        <Fab icon="skip_next" />
+        <Fab icon="skip_previous" onClick={onPrevClick} />
+        <Fab icon="skip_next" onClick={onNextClick} />
       </footer>
     </>
   );
