@@ -52,6 +52,7 @@ exports[`PersonCard should render Person with manager 1`] = `
       </i>
        
       <a
+        data-testid="mail"
         href="mailto:woodard.l@acme.com"
       >
         woodard.l@acme.com
@@ -65,6 +66,7 @@ exports[`PersonCard should render Person with manager 1`] = `
       </i>
        
       <a
+        data-testid="phone"
         href="tel:0784112248"
       >
         0784112248
@@ -79,6 +81,7 @@ exports[`PersonCard should render Person with manager 1`] = `
       </i>
        
       <a
+        data-testid="manager"
         href="/person/5763cd4d3b57c672861bfa1f"
       >
         Erika
@@ -128,6 +131,7 @@ exports[`PersonCard should render Person without manager 1`] = `
       </i>
        
       <a
+        data-testid="mail"
         href="mailto:woodard.l@acme.com"
       >
         woodard.l@acme.com
@@ -141,6 +145,7 @@ exports[`PersonCard should render Person without manager 1`] = `
       </i>
        
       <a
+        data-testid="phone"
         href="tel:0784112248"
       >
         0784112248

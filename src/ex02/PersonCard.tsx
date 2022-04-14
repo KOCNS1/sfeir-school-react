@@ -17,14 +17,20 @@ export const PersonCard: React.FC<PersonCardProps> = ({ person }) => (
       subTitle={person.position}
     />
     <CardInfo icon="email">
-      <a href={"mailto:" + person.email}>{person.email}</a>
+      <a data-testid="mail" href={"mailto:" + person.email}>
+        {person.email}
+      </a>
     </CardInfo>
     <CardInfo icon="phone">
-      <a href={"tel:" + person.phone}>{person.phone}</a>
+      <a data-testid="phone" href={"tel:" + person.phone}>
+        {person.phone}
+      </a>
     </CardInfo>
     {person.managerId !== "" && (
       <CardInfo icon="supervisor_account" desc="manager">
-        <a href={"/person/" + person.managerId}>{person.manager}</a>
+        <a data-testid="manager" href={"/person/" + person.managerId}>
+          {person.manager}
+        </a>
       </CardInfo>
     )}
   </Card>

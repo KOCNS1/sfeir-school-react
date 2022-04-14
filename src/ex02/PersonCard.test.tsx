@@ -71,7 +71,7 @@ describe("PersonCard", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  // > npm i -D regenerator-runtime
+  // > npm install --save-dev regenerator-runtime
 
   // import { render, screen } from "@testing-library/react";
   // import "@testing-library/jest-dom";
@@ -83,5 +83,40 @@ describe("PersonCard", () => {
     const element = screen.getByTestId("full-name");
 
     expect(element).toHaveTextContent("Leanne Woodard");
+  });
+
+  // mail
+  it("should render mail", async () => {
+    render(<PersonCard person={person} />);
+
+    const element = screen.getByTestId("mail");
+
+    expect(element).toHaveTextContent(person.email);
+  });
+
+  // phone
+  it("should render phone", async () => {
+    render(<PersonCard person={person} />);
+
+    const element = screen.getByTestId("phone");
+
+    expect(element).toHaveTextContent(person.phone);
+  });
+
+  // manager
+  it("should render manager", async () => {
+    render(<PersonCard person={person} />);
+
+    const element = screen.getByTestId("manager");
+
+    expect(element).toHaveTextContent(person.manager);
+  });
+
+  it("should not render manager", async () => {
+    render(<PersonCard person={personWithoutManager} />);
+
+    const element = screen.queryByTitle("manager");
+
+    expect(element).toBeNull();
   });
 });
