@@ -9,7 +9,7 @@ import { Loading } from "../solution/Loading";
 
 import { usePerson, useUpdatePerson } from "./connect";
 import { loadPeople } from "../utils";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { State } from "./state";
 
 // import {
@@ -20,10 +20,12 @@ import { State } from "./state";
 // } from "../solution/ex10/connect";
 
 const ConnectedList: any = () => {
-  return <SearchableList people={[]} />;
+  const people = useSelector((state: State) => state.people);
+  return <SearchableList people={people} />;
 };
 const ConnectedPlayer: any = () => {
-  return <Player people={[]} />;
+  const people = useSelector((state: State) => state.people);
+  return <Player people={people} />;
 };
 
 const ConnectedPerson: React.FC<{ personId: string }> = ({ personId }) => (
@@ -36,12 +38,20 @@ type AppProps = {
 };
 
 export const App = () => {
+  const dispatch = useDispatch();
+
   const people = useSelector((state: State) => state.people);
-  const loading = people.length !== 0;
+
+  console.log(people);
+
+  const loading = people.length == 0;
 
   useEffect(() => {
     loadPeople().then((newPeople) => {
-      // dispatch newPeople
+      dispatch({
+        type: "SET_PEOPLE",
+        payload: newPeople,
+      });
     });
   }, [loadPeople]);
 

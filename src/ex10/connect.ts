@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { savePerson, loadPeople } from "../utils";
 import { State, Action } from "./state";
 import { Dispatch } from "redux";
@@ -17,4 +17,11 @@ import { Dispatch } from "redux";
 export const usePerson = (id: string) => null;
 
 // and the onUpdate callback dispatching SET_PERSON using useDispatch
-export const useUpdatePerson = () => (person: Person) => Promise.reject();
+export const useUpdatePerson = () => 
+  (newPerson: Person) => {
+
+    console.log("coucou");
+    // const dispatch = useDispatch();
+
+    // return savePerson(newPerson)
+  };

@@ -5,7 +5,7 @@ export type State = {
 };
 
 // export type Action = { type: "SET_PEOPLE" } | { type: "SET_PERSON" };
-type Action = {
+export type Action = {
   type: "SET_PEOPLE" | "SET_PERSON",
   payload: any
 }
@@ -18,10 +18,12 @@ export const reducer: Reducer<State, Action> = (
   state = initialState,
   action
 ) => {
+
+  console.log(action);
+
   switch (action.type) {
     case "SET_PEOPLE":
-      // do stuff
-      return { ...state }
+      return { people: action.payload }
     case "SET_PERSON":
     default:
       return state;
