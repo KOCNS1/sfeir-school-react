@@ -2,7 +2,7 @@ import React from "react";
 
 import { Header } from "../solution/Header";
 
-import { Carousel } from "./Carousel";
+import { Carousel } from "./Carousel-hooks";
 // import { Carousel } from "../solution/ex03/Carousel.class";
 // import { Carousel } from "../solution/ex03/Carousel.hooks";
 
