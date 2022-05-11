@@ -34,6 +34,7 @@ export class Carousel extends React.Component<CarouselProps, CarouselState> {
   }
 
   // Arrow functions: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+  // https://wesbos.com/arrow-functions
   next = () => {
     const { succ } = range(0, this.props.people.length - 1);
     this.setState({ index: succ(this.state.index) });
