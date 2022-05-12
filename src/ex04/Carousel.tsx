@@ -3,20 +3,35 @@ import { Fab } from "@rmwc/fab";
 
 import { range } from "../utils";
 
-type CarouselProps = {
-  children: React.ReactElement[];
-};
+export const Carousel: React.FC = ({ children }) => {
+  const [current, setCurrent] = useState(0);
 
-export const Carousel: React.FC<CarouselProps> = () => {
+  const childArray = React.Children.toArray(children) as React.ReactElement[];
+
+  const { succ, pred } = range(0, childArray.length - 1);
+
+  const prevElement = React.cloneElement(childArray[pred(current)], {
+    className: "prev",
+  });
+  const currentElement = React.cloneElement(childArray[current], {
+    className: "current",
+  });
+  const nextElement = React.cloneElement(childArray[succ(current)], {
+    className: "next",
+  });
+
+  const increment = () => setCurrent(succ(current));
+  const decrement = () => setCurrent(pred(current));
+
   return (
     <div className="flex-row">
-      <Fab icon="skip_previous" mini />
+      <Fab icon="skip_previous" mini onClick={decrement} />
       <div className="carousel">
-        Display PersonCards here. The current needs to have className="current",
-        the previous "prev" and the next "next" respectively. Use
-        React.cloneElement to add className prop to children
+        {prevElement}
+        {currentElement}
+        {nextElement}
       </div>
-      <Fab icon="skip_next" mini />
+      <Fab icon="skip_next" mini onClick={increment} />
     </div>
   );
 };

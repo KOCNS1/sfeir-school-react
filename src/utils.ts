@@ -1,7 +1,14 @@
-export const range = (min: number, max: number) => ({
-  succ: (x: number) => (x === max ? min : x + 1),
-  pred: (x: number) => (x === min ? max : x - 1),
-});
+export type RangeResult = {
+  pred: (value: number) => number;
+  succ: (value: number) => number;
+};
+
+export const range = (min: number, max: number): RangeResult => {
+  return {
+    succ: (x: number) => (x === max ? min : x + 1),
+    pred: (x: number) => (x === min ? max : x - 1),
+  };
+};
 
 export const toRing = <T>(
   xs: ReadonlyArray<T>,

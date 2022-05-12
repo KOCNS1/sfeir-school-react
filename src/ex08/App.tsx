@@ -8,12 +8,26 @@ import { loadPeople } from "../utils";
 import { SearchableList } from "../solution/SearchableList";
 import { Player } from "../solution/Player";
 import { Person } from "../solution/Person";
+import {
+  PeopleContext,
+  useIsLoading,
+  usePeople,
+  usePersonById,
+} from "./PeopleContext";
+import { PlayerContainer } from "./player/PLayer.container";
+
+const SearchableListWrapper = () => {
+  const people = usePeople();
+  return <SearchableList people={people} />;
+};
+
+const PersonWrapper = ({ match }) => {
+  const person = usePersonById(match.params.id);
+  return <Person person={person} />;
+};
 
 export const App: React.FC = () => {
-  const [people, setPeople] = useState<People>([]);
-  useEffect(() => {
-    loadPeople().then(setPeople);
-  }, []);
+  const isLoading = useIsLoading();
 
   return (
     <>
@@ -21,21 +35,13 @@ export const App: React.FC = () => {
         <HeaderActionItem to="/player" icon="view_carousel" />
         <HeaderActionItem to="/list" icon="view_module" />
       </Header>
-      {people.length === 0 ? (
+      {isLoading ? (
         <Loading />
       ) : (
         <Switch>
-          <Route
-            path="/list"
-            render={() => <SearchableList people={people} />}
-          />
-          <Route path="/player" render={() => <Player people={people} />} />
-          <Route
-            path="/person/:id"
-            render={({ match }: RouteComponentProps<{ id: string }>) => (
-              <Person person={people.find((p) => p.id === match.params.id)} />
-            )}
-          />
+          <Route path="/list" component={SearchableListWrapper} />
+          <Route path="/player" component={PlayerContainer} />
+          <Route path="/person/:id" component={PersonWrapper} />
           <Redirect to="/list" />
         </Switch>
       )}

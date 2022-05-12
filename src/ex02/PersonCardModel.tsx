@@ -7,18 +7,22 @@ import React from "react";
 export const PersonCardModel: React.FC = () => (
   <section className="mdc-card">
     <div className="card-content content-type-person-info">
+      {/* CardImage */}
       <figure>
         <img
           src="https://randomuser.me/portraits/women/85.jpg"
           alt="face of Leanne"
         />
       </figure>
+      {/* CardHeader */}
       <header>
         <h1 className="mdc-typography--headline5">
           <a href="/person/5763cd4d9d2a4f259b53c901">Leanne Woodard</a>
         </h1>
         <h2 className="mdc-typography--subtitle1">Developer</h2>
       </header>
+
+      {/* CardInfo */}
       <p>
         <i
           className="rmwc-icon material-icons rmwc-icon--size-small"
@@ -29,6 +33,7 @@ export const PersonCardModel: React.FC = () => (
         &nbsp;
         <a href="mailto:Leanne.Woodard@BIOSPAN.com">woodard.l@acme.com</a>
       </p>
+
       <p>
         <i
           className="rmwc-icon material-icons rmwc-icon--size-small"
@@ -38,6 +43,7 @@ export const PersonCardModel: React.FC = () => (
         </i>
         &nbsp;<a href="tel:0784112248">0784112248</a>
       </p>
+
       <p>
         <i
           className="rmwc-icon material-icons rmwc-icon--size-small"
