@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextField } from "@rmwc/textfield";
 
 import { PersonCard } from "../solution/PersonCard";
@@ -19,13 +19,22 @@ type SearchableListProps = {
 };
 
 export const SearchableList: React.FC<SearchableListProps> = ({ people }) => {
+  const [query, setQuery] = useState("");
+  const updateQuery = (ev) => setQuery(ev.target.value);
+  const clearQuery = () => setQuery("");
+
+  const filtered = people.filter((p) =>
+    containsSubstring(`${p.firstname} ${p.lastname}`, query)
+  );
   return (
     <>
-      <main>{people.map(toPersonCard)}</main>
+      <main>{filtered.map(toPersonCard)}</main>
       <footer>
         <TextField
           icon="search"
-          trailingIcon={{ icon: "close" }}
+          value={query}
+          onChange={updateQuery}
+          trailingIcon={{ icon: "close", onClick: clearQuery }}
           label="search by name"
         />
       </footer>
