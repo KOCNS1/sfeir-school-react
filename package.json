@@ -21,7 +21,9 @@
     "api:hooks": "node src/expert/hooks/server/index.js",
     "eslint:hooks": "eslint 'src/expert/hooks/**/*.(ts|tsx)'"
   },
-  "alias": { "process": false },
+  "alias": {
+    "process": false
+  },
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "dependencies": {
     "@babel/core": "^7.11.6",
@@ -59,12 +61,12 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@types/jest": "^26.0.21",
-    "@typescript-eslint/eslint-plugin": "^4.20.0",
-    "@typescript-eslint/parser": "^4.20.0",
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
+    "@typescript-eslint/parser": "^5.23.0",
     "eslint": "^7.23.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "eslint-plugin-react": "^7.23.1",
-    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.5.0",
     "jest": "^26.6.3",
     "msw": "^0.27.1",
     "parcel": "^2.3.1",
