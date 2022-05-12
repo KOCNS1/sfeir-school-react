@@ -10,23 +10,30 @@ type AppProps = {
   people: People;
 };
 
+enum View {
+  list = "LIST",
+  carousel = "CAROUSEL",
+}
+
 export const App: React.FC<AppProps> = ({ people }) => {
+  const [view, setView] = useState(View.list);
+
+  const toggleView = () =>
+    setView(view === View.list ? View.carousel : View.list);
+
+  const personCards = people.map((person) => <PersonCard person={person} />);
+
   return (
     <>
       <Header>
-        <TopAppBarActionItem icon="view_carousel" />
-        {/* use "view_module" as icon for showing the list */}
+        {view === View.list && (
+          <TopAppBarActionItem icon="view_carousel" onClick={toggleView} />
+        )}
+        {view === View.carousel && (
+          <TopAppBarActionItem icon="view_module" onClick={toggleView} />
+        )}
       </Header>
-      <main>
-        Switch between a List view and a Carousel view to display all the
-        people. Use TopAppBarActionItems in the Header to do so.
-        <br />
-        <br />
-        Omit the manager icon in PersonCard when there is none.
-        <br />
-        <br />
-        Rewrite the Carousel so it has no dependency on PersonCard.
-      </main>
+      <main>{view === View.list ? personCards : "carousel"}</main>
     </>
   );
 };

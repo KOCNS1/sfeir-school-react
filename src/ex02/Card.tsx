@@ -11,15 +11,42 @@ export const Card: React.FC = ({ children }) => (
 export const CardImage: React.FC<{
   url: string;
   desc: string;
-}> = () => null;
+}> = (props) => {
+  return (
+    <figure>
+      <img src={props.url} alt={props.desc} />
+    </figure>
+  );
+};
 
-export const CardHeader: React.FC<{
+type CardHeaderProps = {
   title: React.ReactNode;
   subTitle: React.ReactNode;
-}> = () => null;
+};
+export const CardHeader: React.FC<CardHeaderProps> = ({ title, subTitle }) => {
+  return (
+    <header>
+      <h1 className="mdc-typography--headline5">{title}</h1>
+      <h2 className="mdc-typography--subtitle1">{subTitle}</h2>
+    </header>
+  );
+};
 
 export const CardInfo: React.FC<{
   icon: string;
   desc?: string;
   children: React.ReactNode;
-}> = () => null;
+}> = ({ desc, icon, children }) => {
+  return (
+    <p>
+      <i
+        className="rmwc-icon material-icons rmwc-icon--size-small"
+        title={desc}
+      >
+        {icon}
+      </i>
+      &nbsp;
+      {children}
+    </p>
+  );
+};

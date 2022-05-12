@@ -1,4 +1,10 @@
-export const range = (min: number, max: number) => ({
+
+export type RangeResult = {
+  succ: (x: number) => number;
+  pred: (x: number) => number;
+};
+
+export const range = (min: number, max: number): RangeResult => ({
   succ: (x: number) => (x === max ? min : x + 1),
   pred: (x: number) => (x === min ? max : x - 1),
 });
