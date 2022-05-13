@@ -1,24 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Switch, Route, Redirect, useParams } from "react-router-dom";
 
 import { Header, HeaderActionItem } from "../solution/Header";
 import { Loading } from "../solution/Loading";
 
-import { SearchableList } from "../solution/SearchableList";
 import { Player } from "../solution/Player";
 // import { Person } from "../solution/Person";
 import { PeopleContext } from "./PeopleContext";
 import { PersonCard } from "../solution/PersonCard";
+import { SearchableList } from "./SearchableList";
 
 // HOC
-const connectPeople = (Component /*: (T) => React.ReactNode*/) => {
-  const WrappedComponent: React.FC = (props) => {
+interface WithPeople {
+  people: People;
+}
+function connectPeople<ComponentProps extends WithPeople>(
+  Component: React.FC<ComponentProps>
+): React.FC<Omit<ComponentProps, "people">> {
+  const WrappedComponent = (props) => {
     const people = useContext(PeopleContext);
     return <Component {...props} people={people} />;
   };
 
-  return WrappedComponent; // (props : T ) => React.ReactNode;
-};
+  return WrappedComponent;
+}
 
 type PersonProps = {
   person: Person;
@@ -42,6 +47,8 @@ export const Person: React.FC<PersonProps> = () => {
 export const App: React.FC = () => {
   const people = useContext(PeopleContext);
 
+  const [query, setQuery] = useState("");
+
   const ConnectedPlayer = connectPeople(Player);
   const ConnectedList = connectPeople(SearchableList);
   return (
@@ -54,7 +61,10 @@ export const App: React.FC = () => {
         <Loading />
       ) : (
         <Switch>
-          <Route path="/list" component={ConnectedList} />
+          <Route
+            path="/list"
+            render={() => <ConnectedList query={query} setQuery={setQuery} />}
+          />
           <Route path="/player" component={ConnectedPlayer} />
           <Route path="/person/:id" component={Person} />
           <Redirect to="/list" />
