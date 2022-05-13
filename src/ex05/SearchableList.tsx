@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { TextField } from "@rmwc/textfield";
 
 import { PersonCard } from "../solution/PersonCard";
@@ -23,8 +23,12 @@ export const SearchableList: React.FC<SearchableListProps> = ({ people }) => {
   const updateQuery = (ev) => setQuery(ev.target.value);
   const clearQuery = () => setQuery("");
 
-  const filtered = people.filter((p) =>
-    containsSubstring(`${p.firstname} ${p.lastname}`, query)
+  const filtered = useMemo(
+    () =>
+      people.filter((p) =>
+        containsSubstring(`${p.firstname} ${p.lastname}`, query)
+      ),
+    [people, query]
   );
   return (
     <>
