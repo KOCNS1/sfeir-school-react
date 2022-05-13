@@ -14,8 +14,10 @@ export const Person: React.FC<PersonProps> = ({ person }) => {
     []
   );
 
+  const cancel = () => setEditing(false);
+
   const card = editing ? (
-    <PersonForm person={person} />
+    <PersonForm person={person} cancel={cancel} />
   ) : (
     <PersonCard person={person} actions={actions} />
   );
