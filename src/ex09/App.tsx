@@ -7,41 +7,41 @@ import { Player } from "../solution/Player";
 import { Loading } from "../solution/Loading";
 
 import { Person } from "./EditablePerson";
-import { PeopleContext } from "./PeopleContext";
+import { usePeople, usePeopleMulti } from "./PeopleContext";
 
 const ContextualList: React.FC = () => {
-  const people = useContext(PeopleContext);
+  const people = usePeople();
   return <SearchableList people={people} />;
 };
 
 const ContextualPlayer: React.FC = () => {
-  const people = useContext(PeopleContext);
+  const people = usePeople();
   return <Player people={people} />;
 };
 
-const ContextualPerson: React.FC<RouteComponentProps<{
-  id: string;
-}>> = ({ match }) => {
-  const people = useContext(PeopleContext);
-  const person = people.find((p) => p.id === match.params.id);
-  return <Person person={person} />;
-};
+// const ContextualPerson: React.FC<RouteComponentProps<{
+//   id: string;
+// }>> = ({ match }) => {
+//   const people = useContext(PeopleContext);
+//   const person = people.find((p) => p.id === match.params.id);
+//   return <Person person={person} />;
+// };
 
 export const App: React.FC = () => {
-  const people = useContext(PeopleContext);
+  const { count } = usePeopleMulti();
   return (
     <>
       <Header>
         <HeaderActionItem to="/player" icon="view_carousel" />
         <HeaderActionItem to="/list" icon="view_module" />
       </Header>
-      {people.length === 0 ? (
+      {count === 0 ? (
         <Loading />
       ) : (
         <Switch>
           <Route path="/list" component={ContextualList} />
           <Route path="/player" component={ContextualPlayer} />
-          <Route path="/person/:id" component={ContextualPerson} />
+          <Route path="/person/:id" component={Person} />
           <Redirect to="/list" />
         </Switch>
       )}
