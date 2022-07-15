@@ -13,6 +13,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
+          <Route index element={<People />} />
           <Route path="people" element={<People />} />
           <Route path="people/new" element={<NewPersonForm />} />
         </Route>
