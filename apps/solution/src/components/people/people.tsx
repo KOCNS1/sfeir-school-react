@@ -1,4 +1,4 @@
-import { Grid } from '@libs/design';
+import { Grid, Button } from '@libs/design';
 import { useMemo, useState } from 'react';
 import Person from '../person/person';
 import usePeople from '../person/usePeople';
@@ -19,17 +19,19 @@ export function People() {
   }), [people, searchTerm])
 
   return (
-    <>
-      <SearchBar searchTerm={searchTerm} onSearchTermChange={setSearchTerm} />
-      <Grid className={style.container}>
+    <div className={style.container}>
+      <div className={style.actionButtons}>
+        <SearchBar searchTerm={searchTerm} onSearchTermChange={setSearchTerm} />
+        <Button onClick={() => console.log("testing button")} className={style.addButton}>Add</Button>
+      </div>
+      <Grid>
         {filteredPeople?.map((person) => <Person key={person.id} person={person} />) ||
           'Loading ...'}
         {people && !filteredPeople?.length && <span>No results</span>}
       </Grid>
-    </>
+    </div>
   );
 }
-
 
 export interface SearchBarProps {
   searchTerm: string;
