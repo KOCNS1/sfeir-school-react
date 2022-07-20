@@ -1,4 +1,5 @@
 @import '../colors.scss';
+@import 'variables';
 
 .app {
   header {
@@ -9,9 +10,33 @@
     height: 64px;
     margin-bottom: 2rem;
 
-    > h1 {
+    >h1 {
       color: $white_color;
       margin: 0 2rem;
+    }
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
+      color: $white_color;
+
+      li,
+      a {
+        color: $white_color;
+        list-style: none;
+        padding: 1em;
+        text-transform: uppercase;
+        transition: $transitionSlow;
+
+        a:hover,
+        a:hover {
+          cursor: pointer;
+          background-color: white;
+          border-radius: $borderRadius;
+          color: $primary_color;
+        }
+      }
     }
   }
 }

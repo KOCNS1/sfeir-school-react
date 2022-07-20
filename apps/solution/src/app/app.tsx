@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import styles from './app.module.scss';
 
 export function App() {
@@ -16,6 +16,9 @@ function Header() {
   return (
     <header>
       <h1>SF≡IR People</h1>
+      <ul>
+        <li><Link to="/people">People</Link></li>
+      </ul>
     </header>
   )
 }
