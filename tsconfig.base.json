@@ -23,6 +23,9 @@
       ],
       "variables": [
         "libs/design/src/lib/styles/_variables.scss"
+      ],
+      "shadows": [
+        "libs/design/src/lib/styles/_shadows.scss"
       ]
     }
   },
