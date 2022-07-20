@@ -1,3 +1,4 @@
+export * from './lib/input/input';
 export * from './lib/buttons/link-button/link-button';
 export * from './lib/buttons/button/button';
 export * from './lib/panel/panel';
