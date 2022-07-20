@@ -13,6 +13,18 @@ export function NewPersonForm(props: NewPersonFormProps) {
     <div>
       <h1>Add new person</h1>
       <form onSubmit={(e) => onSubmit(e)}>
+        <label htmlFor="firstName">
+          First Name
+          <input type="text" name="firstName" id="firstName" />
+        </label>
+        <label htmlFor="lastName">
+          Last name
+          <input type="text" name="lastName" id="lastName" />
+        </label>
+        <label htmlFor="pictureUrl">
+          Picture URL (*)
+          <input type="text" name="pictureUrl" id="pictureUrl" />
+        </label>
         <button type='submit'>SUBMIT</button>
       </form>
     </div>
