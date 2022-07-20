@@ -67,4 +67,11 @@ describe('sfeir-school-react', () => {
       findLeanneWoodardPanel().should('be.visible');
     })
   })
+
+  describe('Add person', () => {
+    beforeEach(() => cy.visit('people/new'))
+    it('should display the add page', () => {
+      cy.contains('New person');
+    })
+  })
 });
