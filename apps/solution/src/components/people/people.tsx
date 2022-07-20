@@ -1,5 +1,6 @@
-import { Grid, Button } from '@libs/design';
+import { Grid, Button, LinkButton } from '@libs/design';
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Person from '../person/person';
 import usePeople from '../person/usePeople';
 
@@ -22,7 +23,7 @@ export function People() {
     <div className={style.container}>
       <div className={style.actionButtons}>
         <SearchBar searchTerm={searchTerm} onSearchTermChange={setSearchTerm} />
-        <Button onClick={() => console.log("testing button")} className={style.addButton}>Add</Button>
+        <LinkButton to="people/new">Add</LinkButton >
       </div>
       <Grid>
         {filteredPeople?.map((person) => <Person key={person.id} person={person} />) ||

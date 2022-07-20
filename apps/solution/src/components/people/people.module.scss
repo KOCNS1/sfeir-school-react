@@ -26,8 +26,8 @@
 .actionButtons {
   display: flex;
   margin: 2em 0;
-}
 
-.addButton {
-  margin-left: 1em;
+  >* {
+    margin-left: 1em;
+  }
 }
