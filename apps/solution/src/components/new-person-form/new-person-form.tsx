@@ -1,20 +1,21 @@
-import { Button, Input } from '@libs/design';
-import { FormEvent } from 'react';
+import { Button, Input, Title } from '@libs/design';
+import { FormEvent, useState } from 'react';
 import styles from './new-person-form.module.scss';
 
 /* eslint-disable-next-line */
 export interface NewPersonFormProps { }
 
 export function NewPersonForm(props: NewPersonFormProps) {
+  const [payload, setPayload] = useState({})
   function onSubmit(e: FormEvent<HTMLFormElement>): void {
     e.preventDefault()
     console.log("Test", e)
   }
   return (
     <div className={"container " + styles['newPerson']}>
-      <h1>Add new person</h1>
+      <Title>Add new person</Title>
       <form onSubmit={(e) => onSubmit(e)}>
-        <Input type="text" name="firstName" label="First Name" mandatory />
+        <Input type="text" name="firstName" label="First Name" value="test" mandatory />
         <Input type="text" name="lastName" label="Last Name" mandatory />
         <Input type="text" name="pictureURL" label="Picture URL" mandatory />
         <Input type="text" name="position" label="Position" />
