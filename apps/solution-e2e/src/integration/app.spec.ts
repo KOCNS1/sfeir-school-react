@@ -72,6 +72,23 @@ describe('sfeir-school-react', () => {
       it('should display the add page', () => {
         cy.contains('Add new person');
       })
+
+      it('should have all the necessary inputs', () => {
+        const labels = [
+          "First Name",
+          "Last Name",
+          "Picture URL",
+          "Position"
+        ]
+        cy.get('[data-cy^="field-"]').each((item, index, list) => {
+          expect(list).to.have.length(4)
+          cy.wrap(item).should("contain.text", labels[index])
+        })
+      })
+
+      it('should have firstname, lastname and picture mandatory', () => {
+        expect(true)
+      })
     })
   })
 });
