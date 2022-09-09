@@ -1,14 +1,13 @@
-import { useEffect, useState } from 'react';
-import { getPeople, PersonModel } from '../../api/person';
+import { useMemo } from 'react';
+import { useContext } from 'react';
+import { PeopleContextType, PeopleContext } from '../../context/PeopleContext';
 
 export default function useManagers(currentId: string) {
-  const [managers, setManagers] = useState<PersonModel[] | null>(null);
+  const { people } = useContext(PeopleContext) as PeopleContextType;
 
-  useEffect(() => {
-    getPeople().then((res) =>
-      setManagers(res.filter((p) => p.id !== currentId && p.isManager))
-    );
-  }, [currentId]);
-
+  const managers = useMemo(
+    () => people?.filter((p) => p.id !== currentId && p.isManager),
+    [currentId, people]
+  );
   return managers;
 }
